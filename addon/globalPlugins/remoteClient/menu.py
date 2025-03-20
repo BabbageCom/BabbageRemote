@@ -1,5 +1,7 @@
 from typing import TYPE_CHECKING
 
+import addonHandler
+
 import wx
 
 if TYPE_CHECKING:
@@ -9,6 +11,13 @@ if TYPE_CHECKING:
 import gui
 
 from .connection_info import ConnectionMode
+
+try:
+	addonHandler.initTranslation()
+except addonHandler.AddonError:
+	log.warning(
+		"Unable to initialise translations. This may be because the addon is running from NVDA scratchpad."
+	)
 
 
 class RemoteMenu(wx.Menu):
@@ -21,11 +30,15 @@ class RemoteMenu(wx.Menu):
 	copyLinkItem: wx.MenuItem
 	sendCtrlAltDelItem: wx.MenuItem
 	remoteItem: wx.MenuItem
+	hulpItem: wx.MenuItem
+	ondersteuningItem: wx.MenuItem
 
 	def __init__(self, client: "RemoteClient") -> None:
 		super().__init__()
 		self.client = client
 		toolsMenu = gui.mainFrame.sysTrayIcon.toolsMenu
+  
+  
 		# Translators: Item in NVDA Remote submenu to connect to a remote computer.
 		self.connectItem: wx.MenuItem = self.Append(
 			wx.ID_ANY,
@@ -80,6 +93,26 @@ class RemoteMenu(wx.Menu):
 			wx.EVT_MENU, self.onSendCtrlAltDel, self.sendCtrlAltDelItem
 		)
 		self.sendCtrlAltDelItem.Enable(False)
+  
+
+		self.hulpItem: wx.MenuItem = self.Append(
+			wx.ID_ANY,
+			_("Help by Babbage..."),
+			_("Receive support"),
+		)
+		gui.mainFrame.sysTrayIcon.Bind(
+			wx.EVT_MENU, self.client.launchBabbageHulp, self.hulpItem
+		)
+		self.ondersteuningItem: wx.MenuItem = self.Append(
+			wx.ID_ANY,
+			_("Support by Babbage..."),
+			_("Receive support"),
+		)
+		gui.mainFrame.sysTrayIcon.Bind(
+			wx.EVT_MENU, self.client.launchBabbageOndersteuning, self.ondersteuningItem
+		)	
+  
+  
 		# Translators: Label of menu in NVDA tools menu.
 		self.remoteItem = toolsMenu.AppendSubMenu(
 			self, _("R&emote"), _("NVDA Remote Access")

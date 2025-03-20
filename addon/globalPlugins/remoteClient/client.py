@@ -2,6 +2,7 @@ import ctypes
 import ctypes.wintypes
 import logging
 import os
+import subprocess
 import sys
 import threading
 from typing import Callable, Optional, Set, Tuple
@@ -238,6 +239,22 @@ class RemoteClient:
 				message=_("Unable to connect to the remote computer"),
 				style=wx.OK | wx.ICON_WARNING,
 			)
+   
+	def launchBabbageHulp(self, evt=None):
+		babbagehulp_path = os.path.join(os.path.dirname(__file__), "BabbageHulp.exe")
+
+		try:
+			subprocess.run(["powershell", "Start-Process", "-FilePath", f'"{babbagehulp_path}"', "-Verb", "runAs"], shell=True)
+		except Exception as e:
+			ui.message(f"Failed to start Babbage Hulp: {e}")
+   
+	def launchBabbageOndersteuning(self, evt=None):
+		babbageondersteuning_path = os.path.join(os.path.dirname(__file__), "BabbageOndersteuning.exe")
+
+		try:
+			subprocess.run(["powershell", "Start-Process", "-FilePath", f'"{babbageondersteuning_path}"', "-Verb", "runAs"], shell=True)
+		except Exception as e:
+			ui.message(f"Failed to start Babbage Ondersteuning: {e}")
 
 	def doConnect(self, evt=None):
 		if evt is not None:

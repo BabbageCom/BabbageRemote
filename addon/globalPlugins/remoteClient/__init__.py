@@ -1,6 +1,7 @@
 import logging
 import sys
-
+import os
+import subprocess
 import addonHandler
 import ui
 from globalPluginHandler import GlobalPlugin as _GlobalPlugin
@@ -73,3 +74,27 @@ class GlobalPlugin(_GlobalPlugin):
 	)
 	def script_sendKeys(self, gesture):
 		self.client.toggleRemoteKeyControl(gesture)
+  
+	@script(
+		description = _("""Launch BabbageHulp"""),
+  		gesture="kb:NVDA+alt+2",
+	)
+	def script_launchBabbageHulp(self, gesture):
+		"""Launch BabbageHulp as administrator."""
+		self.client.launchBabbageHulp()
+   
+	@script(
+		description = _("""Launch BabbageOndersteuning"""),
+  		gesture="kb:NVDA+alt+3",
+	)
+	def script_launchBabbageOndersteuning(self, gesture):
+		"""Launch BabbageOndersteuning as administrator."""
+		self.client.launchBabbageOndersteuning()
+  
+	@script(
+		description = _("""Launch Connect"""),
+  		gesture="kb:NVDA+alt+1",
+	)
+	def script_launchConnect(self, gesture):
+		"""Open connect dialog."""
+		self.client.doConnect()

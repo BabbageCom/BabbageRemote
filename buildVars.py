@@ -1,3 +1,7 @@
+# This project is derived from 
+# https://github.com/nvdaremote/nvdaremote
+# Authors of the original work: Tyler Spivey <tspivey@pcdesk.net>, Christopher Toth <q@q-continuum.net>
+
 # -*- coding: UTF-8 -*-
 
 # Build customizations
@@ -11,21 +15,21 @@ addon_info = {
 	# for previously unpublished addons, please follow the community guidelines at:
 	# https://bitbucket.org/nvdaaddonteam/todo/raw/master/guidelines.txt
 	# add-on Name, internal for nvda
-	"addon_name" : "remote",
+	"addon_name" : "Babbage-Remote",
 	# Add-on summary, usually the user visible name of the addon.
 	# Translators: Summary for this add-on to be shown on installation and add-on information.
-	"addon_summary" : _("Remote Support"),
+	"addon_summary" : _("Babbage Remote"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
-	"addon_description" : _("""Allows remote control of and remote access to another machine."""),
+	"addon_description" : _("""Allow remote support on this device."""),
 	# version
-	"addon_version" : "2.6.4",
+	"addon_version" : "2025.1",
 	# Author(s)
-	"addon_author" : u"Tyler Spivey <tspivey@pcdesk.net>, Christopher Toth <q@q-continuum.net>",
+	"addon_author" : "Babbage",
 	# URL for the add-on documentation support
-	"addon_url" : "https://NVDARemote.com",
+	"addon_url" : "https://babbage.com",
 	# URL for the add-on repository where the source code can be found
-	"addon_sourceURL": "https://github.com/nvdaremote/nvdaremote",
+	"addon_sourceURL": "https://github.com/babbagecom/babbageremote",
 	# Documentation file name
 	"addon_docFileName" : "readme.html",
 	# Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)

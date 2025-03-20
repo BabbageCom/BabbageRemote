@@ -34,7 +34,7 @@ class ClientPanel(wx.Panel):
 		super().__init__(parent, id)
 		sizer = wx.BoxSizer(wx.HORIZONTAL)
 		# Translators: The label of an edit field in connect dialog to enter name or address of the remote computer.
-		sizer.Add(wx.StaticText(self, wx.ID_ANY, label=_("&Host:")))
+		# sizer.Add(wx.StaticText(self, wx.ID_ANY, label=_("&Host:")))
 		self.host = wx.ComboBox(self, wx.ID_ANY)
 		sizer.Add(self.host)
 		# Translators: Label of the edit field to enter key (password) to secure the remote connection.
@@ -172,6 +172,7 @@ class DirectConnectDialog(wx.Dialog):
 
 	def __init__(self, parent: wx.Window, id: int, title: str, hostnames: Optional[List[str]] = None):
 		super().__init__(parent, id, title=title)
+    
 		main_sizer = self.main_sizer = wx.BoxSizer(wx.VERTICAL)
 		self.client_or_server = wx.RadioBox(self, wx.ID_ANY, choices=(_("Client"), _("Server")), style=wx.RA_VERTICAL)
 		self.client_or_server.Bind(wx.EVT_RADIOBOX, self.onClientOrServer)
@@ -195,6 +196,19 @@ class DirectConnectDialog(wx.Dialog):
 		if hostnames:
 			self.panel.host.AppendItems(hostnames)
 			self.panel.host.SetSelection(0)
+   
+		self.panel.host.SetValue("")
+		self.panel.host.Hide()
+		self.connection_type.SetSelection(1)
+		self.connection_type.Hide()
+		self.client_or_server.SetSelection(0)
+		self.client_or_server.Hide()
+		self.panel.key.SetFocus()
+		self.panel.generate_key.Hide()
+		self.panel.Layout()
+		self.panel.Fit()
+		self.Layout()
+		self.Fit()
 
 	def onClientOrServer(self, evt: wx.CommandEvent) -> None:
 		evt.Skip()
